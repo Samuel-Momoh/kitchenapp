@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "249197022540",
+    "firebase_url": "https://storagetech-demo-default-rtdb.firebaseio.com",
+    "project_id": "storagetech-demo",
+    "storage_bucket": "storagetech-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249197022540:android:ac063c3a02a225c2f993e9",
+        "android_client_info": {
+          "package_name": "app.kitchen.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249197022540-sbmn3vocum0fveh2nan9lqo44ntssfup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFOkEz51KM3YE5noQOKSc1H2NzwLaPylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249197022540-sbmn3vocum0fveh2nan9lqo44ntssfup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

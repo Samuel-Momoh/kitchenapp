@@ -1,0 +1,68 @@
+const foods = [
+  {
+    id: 1,
+    name: 'Meat Pizza',
+    ingredients: 'Mixed Pizza',
+    price: 8.30,
+    image: require('../assets/meatPizza.png'),
+    categoryId: 'food_1',
+  },
+  {
+    id: 2,
+    name: 'Cheese Pizza',
+    ingredients: 'Cheese Pizza',
+    price: 7.10,
+    image: require('../assets/cheesePizza.png'),
+    categoryId: 'food_2',
+  },
+  {
+    id: 3,
+    name: 'Chicken Burger',
+    ingredients: 'Fried Chicken',
+    price: 5.10,
+    image: require('../assets/chickenBurger.png'),
+    categoryId: 'food_3',
+  },
+  {
+    id: 4,
+    name: 'Sushi Makizushi',
+    ingredients: 'Salmon Meat',
+    price: 9.55,
+    image: require('../assets/sushiMakizushi.png'),
+    categoryId: 'food_4',
+  },
+  {
+    id: 5,
+    name: 'Meat Pizza',
+    ingredients: 'Mixed Pizza',
+    price: 8.30,
+    image: require('../assets/meatPizza.png'),
+    categoryId: 'food_1',
+  },
+  {
+    id: 6,
+    name: 'Cheese Pizza',
+    ingredients: 'Cheese Pizza',
+    price: 7.10,
+    image: require('../assets/cheesePizza.png'),
+    categoryId: 'food_2',
+  },
+  {
+    id: 7,
+    name: 'Chicken Burger',
+    ingredients: 'Fried Chicken',
+    price: 5.10,
+    image: require('../assets/chickenBurger.png'),
+    categoryId: 'food_3',
+  },
+  {
+    id: 8,
+    name: 'Sushi Makizushi',
+    ingredients: 'Salmon Meat',
+    price: 9.55,
+    image: require('../assets/sushiMakizushi.png'),
+    categoryId: 'food_4',
+  },
+];
+
+export default foods;
