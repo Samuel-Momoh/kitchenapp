@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button as RNButton,Image } from 'react-native';
+import { StyleSheet, Text, View, Button as RNButton,Image,Alert } from 'react-native';
 import {ActivityButton} from '../components/Button';
 import { InputField, ErrorMessage } from '../components';
 import auth from '@react-native-firebase/auth';
@@ -32,15 +32,41 @@ export default function ForgetPasswordScreen({ navigation }) {
       if (email !== '') {
         await auth().sendPasswordResetEmail(email)
         .then(function (user) {
-            // console.log('Please check your email...')
-            setloading(false)
+          Alert.alert(
+            "Successful",
+            "Please check your email...",
+            [
+              { text: "OK", onPress: () => {
+                setloading(false)
+              } }
+            ]
+          );
           }).catch(function (e) {
-            // console.log(e)
-            setloading(false)
+            const msg = e.message.substr(e.message.indexOf(' ')+1);;
+            Alert.alert(
+              "Error",
+              msg,
+              [
+                { text: "OK", onPress: () => {
+                  setloading(false)
+                } }
+              ]
+            );
           })
+      }else{
+        Alert.alert(
+          "Error",
+          "One Or More is Empty",
+          [
+            { text: "OK", onPress: () => {
+              setloading(false)
+            } }
+          ]
+        );
       }
     } catch (error) {
-      setLoginError(error.message);
+
+      setloading(false)
     }
   };
 

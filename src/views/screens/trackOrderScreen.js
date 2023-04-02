@@ -122,7 +122,7 @@ const TrackOrders = ({navigation, route}) => {
             <Image source={require("../../assets/img/location.jpg")} style={{width: 50, height: 50 }} />
             </View>
             <View style={style.agentDis}>
-            <Text style={{lineHeight:30,fontWeight:'bold'}}>Jumia Express Delivery</Text>
+            <Text style={{lineHeight:30,fontWeight:'bold'}}>DHL Express Delivery</Text>
               <Text style={{color:'grey'}} > 20th Oct To 30th Oct </Text>
               </View>
             </View>

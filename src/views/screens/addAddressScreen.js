@@ -2,6 +2,7 @@ import React,{ useEffect, useContext,useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Text, Image,Dimensions,} from 'react-native';
 import {ScrollView, TouchableOpacity,TextInput,FlatList,} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Entypo } from "@expo/vector-icons";
 import COLORS from '../../consts/colors';
 import {ActivityButton} from '../components/Button';
 import { useDispatch, useSelector } from 'react-redux'
@@ -290,7 +291,8 @@ onPress={()=>{
 }}
 
 >
-<Icon name="location-pin" size={28} style={style.icon} />
+<Entypo name="compass" size={28} style={style.icon} />
+
 </TouchableOpacity>
 </View>
     </SafeAreaView>

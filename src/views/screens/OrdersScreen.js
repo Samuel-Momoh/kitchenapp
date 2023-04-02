@@ -25,7 +25,7 @@ const OrderScreen = ({navigation}) => {
           <Text style={{fontSize: 12, color: COLORS.grey}}>
             {item.item.name}
           </Text>
-          <Text style={{fontSize: 17, fontWeight: 'bold'}}>${parseInt(item.item.price) * parseInt(item.item.quantity)}</Text>
+          <Text style={{fontSize: 17, fontWeight: 'bold'}}>₦{parseInt(item.item.price) * parseInt(item.item.quantity)}</Text>
         </View>
         <View style={{marginRight: 20, alignItems: 'center'}}>
         <Text style={{fontWeight: 'bold', fontSize: 16}}>{item.item.quantity}</Text>

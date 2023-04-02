@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button as RNButton,Image } from 'react-native';
+import { StyleSheet, Text, View, Button as RNButton,Image,Alert } from 'react-native';
 import {ActivityButton} from '../components/Button';
 import { InputField, ErrorMessage } from '../components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -54,9 +54,29 @@ export default function SignupScreen({ navigation }) {
             });
         })
         ;
+      }else{
+        Alert.alert(
+          "Error",
+          "One Or More is Empty",
+          [
+            { text: "OK", onPress: () => {
+              setloading(false)
+            } }
+          ]
+        );
       }
     } catch (error) {
-      setSignupError(error.message);
+      const msg = error.message.substr(error.message.indexOf(' ')+1);;
+      Alert.alert(
+        "Error",
+        msg,
+        [
+          { text: "OK", onPress: () => {
+            setloading(false)
+          } }
+        ]
+      );
+      setloading(false)
     }
   };
 

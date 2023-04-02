@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator,Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomNavigator from './BottomNavigator';
 import DetailsScreen from '../screens/DetailsScreen';
@@ -9,7 +9,7 @@ import AddressScreen from '../screens/addressScreen';
 import AddAddressScreen from '../screens/addAddressScreen';
 import OrderSummary  from '../screens/orderSummaryScreen';
 import OrderConfirmation  from '../screens/orderConfirmation';
-
+// import NetInfo from '@react-native-community/netinfo';
 import { LOAD_USER,LOAD_ADDR,LOAD_IMG } from '../../../Store/Actions/ProductsActions'
 import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage';
@@ -21,7 +21,6 @@ export default function HomeStack() {
   const dispatch = useDispatch()
     const { user} = useContext(AuthenticatedUserContext);
     const [isLoading, setIsLoading] = useState(true);
- 
     async function onLoad(authenticatedUser) {
            try {
  
@@ -90,6 +89,21 @@ export default function HomeStack() {
      
        onLoad(user);
        // unsubscribe on unmount
+      //  NetInfo.fetch().then(state => {
+      //   console.log('Connection type', state.type);
+      //   console.log('Is connected?', state.isConnected);
+      //   state.isConnected?
+      // null
+      //   :
+      //   Alert.alert(
+      //     "Error",
+      //     "No internet Connection",
+      //     [
+      //       { text: "Retry", onPress: () => {
+      //       } }
+      //     ]
+      //   )
+      // });
     }, []);
     if (isLoading) {
       return (

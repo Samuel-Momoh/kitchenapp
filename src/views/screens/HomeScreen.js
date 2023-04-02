@@ -250,7 +250,7 @@ useEffect(() => {
               justifyContent: 'space-between',
             }}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-              ${food.price}
+            ₦{food.price}
             </Text>
             <View style={style.addToCartBtn}>
               <Icon name="add" size={20} color={COLORS.white} />
@@ -278,7 +278,10 @@ useEffect(() => {
         <Text style={{fontSize: 13}}>
           {
             userDetails[0][0].address?
+            address.length !==0?
             address[0][0].formatted
+            :
+            null
             :
             "Click To Set Address"
           }

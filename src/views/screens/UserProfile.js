@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react';
+import React,{ useState } from 'react';
 import {Text, StyleSheet, View, Image} from 'react-native';
 import {
   TouchableOpacity,
@@ -25,11 +25,7 @@ const users = firestore().collection('users')
       .doc(docid)
       .update(data)
       .then(() => {
-        // dispatch(EDIT_USER({
-        //   name: fname + Lname,
-        //   email: user[0][0].email,
-        //   phone: num
-        // }))
+   
         console.log('User updated!');
       });
     }
@@ -37,8 +33,6 @@ const users = firestore().collection('users')
 var uploadImageToStorage = async (uri) => {
   const response = await fetch(uri);
   const blob = await response.blob();
-  // const url = await Firebase.storage().ref(auth.currentUser.email).getDownloadURL();
-  // console.log(url)
   let ref = storage().ref().child(auth().currentUser.email+'.jpg');
   return ref.put(blob).then(()=>{
     updateUser(user[0][0].id,{
@@ -76,10 +70,6 @@ const handleSignOut = async () => {
 
 
 const UserProfile = ({navigation}) => {
-  // useEffect(async () => {
-  //   const url = await Firebase.storage().ref(auth().currentUser.email+'.jpg').getDownloadURL();
-  //   setImg(url)
-  // },[])
 const user = useSelector((state) => state.users.users)
 const userImg = useSelector((state) => state.users.userImg)
 const dispatch = useDispatch()

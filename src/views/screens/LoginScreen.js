@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button as RNButton,Image,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button as RNButton,Image,Dimensions, Alert } from 'react-native';
 import {ActivityButton} from '../components/Button';
 import { InputField, ErrorMessage } from '../components';
 import auth from '@react-native-firebase/auth';
@@ -36,9 +36,28 @@ const [loading, setloading] = useState(false)
           setloading(false)
         })
         ;
+      }else{
+        Alert.alert(
+          "Error",
+          "One Or More is Empty",
+          [
+            { text: "OK", onPress: () => {
+              setloading(false)
+            } }
+          ]
+        );
       }
     } catch (error) {
-      setLoginError(error.message);
+      const msg = error.message.substr(error.message.indexOf(' ')+1);;
+      Alert.alert(
+        "Error",
+        msg,
+        [
+          { text: "OK", onPress: () => {
+            setloading(false)
+          } }
+        ]
+      );
       setloading(false)
     }
   };

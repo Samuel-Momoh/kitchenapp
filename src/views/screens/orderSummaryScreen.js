@@ -1,6 +1,6 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { useSelector, useDispatch, } from 'react-redux';
-import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image,Alert} from 'react-native';
 import {ScrollView, TouchableOpacity,TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
@@ -18,12 +18,12 @@ const ordersTotal = useSelector((state)=> state.cartItems.total );
 const userDetails = useSelector((state) => state.users.users)
 const userAddress = useSelector((state) => state.users.address)
   const dispatch = useDispatch()
-  const [DeliveryFee, setDeliveryFee] = useState(70);
-  const [num, setNum] = useState('08166723207');
+  const [DeliveryFee, setDeliveryFee] = useState(800);
+  const [num, setNum] = useState('');
 
 const onAddButtonPress =  () => {
   setloading(true)
-  if (num && num !== '') {
+  if (num && num !== '' && userDetails[0][0].address ==true) {
     var orderNum = Math.floor(Math.random() * 1000000000)
       orders.map( async (order,i)=>{
         const data = {
@@ -54,7 +54,16 @@ const onAddButtonPress =  () => {
                 // console.log("successful")
               })
               .catch((error) => {
-                console.log(error)
+                const msg = error.message.substr(error.message.indexOf(' ')+1);;
+                Alert.alert(
+                  "Error",
+                  msg,
+                  [
+                    { text: "OK", onPress: () => {
+                      setloading(false)
+                    } }
+                  ]
+                )
               });
           })
           .catch((error) => {
@@ -64,8 +73,21 @@ const onAddButtonPress =  () => {
       setloading(false)
       dispatch(CLEAR_ITEM())
       navigation.navigate("OrderConfirmation",orderNum)
+}else{
+  Alert.alert(
+    "Error",
+    "Phone Number or Address is empty",
+    [
+      { text: "OK", onPress: () => {
+        setloading(false)
+      } }
+    ]
+  );
 }
    }
+  useEffect(() => {
+    setNum(userDetails[0][0].phone)
+  }, [])
     const Orderlist = ({item}) => {
         return (
          <View style={style.listCon}>
@@ -76,7 +98,7 @@ const onAddButtonPress =  () => {
              </View>
       
              <View style={style.right}>
-          <Text style={style.itemPrice}>$ {(item.price * item.quantity).toFixed(2)}</Text>
+          <Text style={style.itemPrice}>₦ {(item.price * item.quantity).toFixed(2)}</Text>
              </View>
       
          </View>
@@ -124,14 +146,34 @@ const onAddButtonPress =  () => {
           }}>
           <Text style={{fontWeight: 'bold', fontSize: 16, fontFamily:'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'}}>Delivery Location</Text>
           <Text style={{fontSize: 13, color: COLORS.grey}}>
-          Local Govt Council Okehi, Ecthe Rivers State
+          {
+            userDetails[0][0].address?
+            userAddress.length !==0?
+            userAddress[0][0].formatted
+            :
+            null
+            :
+            "Click Add To Set Address"
+          }
+          
           </Text>
         </View>
         <View style={{marginRight: 20, alignItems: 'center'}}>
           <TouchableOpacity
-          onPress={() => navigation.navigate('AddressScreen')}
+          onPress={() => {
+            userDetails[0][0].address?
+            navigation.navigate('AddressScreen')
+            :
+            navigation.navigate('Addaddress')
+          }}
           >
-          <Text style={{ fontSize: 18, color: 'rgb(249, 129, 58)', textAlign: 'center',}}>Edit</Text>
+                {
+            userDetails[0][0].address?
+            <Text style={{ fontSize: 18, color: 'rgb(249, 129, 58)', textAlign: 'center',}}>Edit</Text>
+            :
+            <Text style={{ fontSize: 18, color: 'rgb(249, 129, 58)', textAlign: 'center',}}>Add</Text>
+          }
+         
           </TouchableOpacity>
         </View>
       </View>
@@ -207,7 +249,7 @@ const onAddButtonPress =  () => {
       </View>
 
        <View style={style.right}>
-        <Text style={style.itemPrice}>$ {ordersTotal.toFixed(2)}</Text>
+        <Text style={style.itemPrice}>₦ {ordersTotal.toFixed(2)}</Text>
       </View>
 
          </View>
@@ -218,7 +260,7 @@ const onAddButtonPress =  () => {
       </View>
 
        <View style={style.right}>
-        <Text style={style.itemPrice}>$ {(0.1 * ordersTotal).toFixed(2)}</Text>
+        <Text style={style.itemPrice}>₦ {(0.1 * ordersTotal).toFixed(2)}</Text>
       </View>
 
          </View>
@@ -230,7 +272,7 @@ const onAddButtonPress =  () => {
       </View>
 
        <View style={style.right}>
-        <Text style={style.itemPrice}>$ {DeliveryFee}</Text>
+        <Text style={style.itemPrice}>₦ {DeliveryFee}</Text>
       </View>
 
          </View>
@@ -241,7 +283,7 @@ const onAddButtonPress =  () => {
       <View style={style.placeOrder}>
           <View style={style.orderTotal}>
           <Text style={{fontWeight: 'bold', fontSize:18,fontFamily:'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'}}>Total(Inc VAT)</Text>
-          <Text style={{fontWeight: 'bold', fontSize:18, color:'grey'}}>$ { (parseInt(DeliveryFee) + ordersTotal  + (0.1 * ordersTotal)).toFixed(2) }</Text>
+          <Text style={{fontWeight: 'bold', fontSize:18, color:'grey'}}>₦ { (parseInt(DeliveryFee) + ordersTotal  + (0.1 * ordersTotal)).toFixed(2) }</Text>
           </View>
           <View style={style.placeBtn}>
           <ActivityButton

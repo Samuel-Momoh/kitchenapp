@@ -27,7 +27,7 @@ const WishScreen = ({navigation}) => {
           <Text style={{fontSize: 12, color: COLORS.grey}}>
             {item.ingredients}
           </Text>
-          <Text style={{fontSize: 17, fontWeight: 'bold'}}>${item.price}</Text>
+          <Text style={{fontSize: 17, fontWeight: 'bold'}}>₦{item.price}</Text>
         </View>
         <View style={{marginRight: 20, alignItems: 'center'}}>
           <View style={style.actionBtn}>
